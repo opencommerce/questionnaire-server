@@ -7,6 +7,11 @@ import {
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
+import {
+  AuthenticationComponent,
+  AuthenticationBindings,
+} from '@loopback/authentication';
+import {MyAuthStrategyProvider} from './providers';
 import * as path from 'path';
 import {MySequence} from './sequence';
 
@@ -29,6 +34,12 @@ export class QuestionnaireApplication extends BootMixin(
     this.component(RestExplorerComponent);
 
     this.projectRoot = __dirname;
+
+    this.component(AuthenticationComponent);
+    this.bind(AuthenticationBindings.STRATEGY).toProvider(
+        MyAuthStrategyProvider,
+    );
+
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
       controllers: {

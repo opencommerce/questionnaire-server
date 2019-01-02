@@ -54,6 +54,7 @@
     "@loopback/rest": "^1.5.1",
     "@loopback/rest-explorer": "^1.1.4",
     "@loopback/service-proxy": "^1.0.5",
+    "memory": "0.0.3",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0"
   },
