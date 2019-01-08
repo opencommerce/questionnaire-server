@@ -8,6 +8,7 @@ import {
   RestBindings,
   Send,
   SequenceHandler,
+  StaticAssetsRoute,
 } from '@loopback/rest';
 import {AuthenticationBindings, AuthenticateFn} from '@loopback/authentication';
 
@@ -30,7 +31,9 @@ export class MySequence implements SequenceHandler {
       const route = this.findRoute(request);
 
       // This is the important line added to the default sequence implementation
-      await this.authenticateRequest(request);
+      if (!(route instanceof StaticAssetsRoute)) {
+        await this.authenticateRequest(request);
+      }
 
       // Authentication successful, proceed to invoke controller
       const args = await this.parseParams(request, route);
