@@ -14,6 +14,7 @@ import {
 import {MyAuthStrategyProvider} from './providers';
 import * as path from 'path';
 import {MySequence} from './sequence';
+import {PasswordHasher} from './utilities';
 
 export class QuestionnaireApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -39,6 +40,8 @@ export class QuestionnaireApplication extends BootMixin(
     this.bind(AuthenticationBindings.STRATEGY).toProvider(
         MyAuthStrategyProvider,
     );
+
+    this.bind('utilities.PasswordHasher').toClass(PasswordHasher);
 
     // Customize @loopback/boot Booter Conventions here
     this.bootOptions = {
